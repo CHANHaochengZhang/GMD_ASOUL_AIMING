@@ -46,6 +46,28 @@ public class WeaponController : MonoBehaviour
     public Text ammoTextUI;
     public Image crossHairUI;
     
+    [System.Serializable]
+    public class spawnpoints
+    {  
+        [Header("Spawnpoints")]
+        //Array holding casing spawn points 
+        //Casing spawn point array
+        public Transform casingSpawnPoint;
+        //Bullet prefab spawn from this point
+        public Transform bulletSpawnPoint;
+        //Grenade prefab spawn from this point
+        public Transform grenadeSpawnPoint;
+    }
+    [System.Serializable]
+    public class prefabs
+    {  
+        [Header("Prefabs")]
+        public Transform bulletPrefab;
+        public Transform casingPrefab;
+        public Transform grenadePrefab;
+    }
+    public prefabs Prefabs;
+    public spawnpoints Spawnpoints;
     
     //Animation
     private Animator anim;
@@ -77,7 +99,6 @@ public class WeaponController : MonoBehaviour
             // mainCamera.transform.Rotate(Vector3.left*(bulletsMag-currentBullets));
             
             // mainCamera.transform.rotation = Quaternion.Euler(-2,0f,0f);
-            
         }
         else
         {
@@ -128,6 +149,22 @@ public class WeaponController : MonoBehaviour
             GameObject bulletHoleEffect =
                 Instantiate(bulletHole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
 
+            //Spawn bullet at bullet spawnpoint
+            var bullet = (Transform)Instantiate (
+                Prefabs.bulletPrefab,
+                Spawnpoints.bulletSpawnPoint.transform.position,
+                Spawnpoints.bulletSpawnPoint.transform.rotation);
+
+            //Add velocity to the bullet
+            bullet.GetComponent<Rigidbody>().velocity = 
+                bullet.transform.forward * 100;
+
+            //Spawn casing prefab at spawnpoint
+            Instantiate (Prefabs.casingPrefab, 
+                Spawnpoints.casingSpawnPoint.transform.position, 
+                Spawnpoints.casingSpawnPoint.transform.rotation);
+            
+            
             Destroy(hitParticleEffect, 1);
             Destroy(bulletHoleEffect, 3f);
         }

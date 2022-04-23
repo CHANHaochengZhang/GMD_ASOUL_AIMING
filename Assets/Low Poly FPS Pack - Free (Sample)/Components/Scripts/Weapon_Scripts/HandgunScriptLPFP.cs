@@ -403,7 +403,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		{
 			anim.SetTrigger ("Inspect");
 		}
-
+ 
 		//Toggle weapon holster when pressing E key
 		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
 		{
