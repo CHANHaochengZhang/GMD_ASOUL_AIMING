@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class WeaponController : MonoBehaviour
@@ -31,7 +32,7 @@ public class WeaponController : MonoBehaviour
     
     //sound audio
     private AudioSource audioSource;
-    public AudioClip AK47SoundClip;
+    [FormerlySerializedAs("AK47SoundClip")] public AudioClip ak47SoundClip;
     public AudioClip reloadLeft;
     public AudioClip reloadOutOfAmmo;
     
@@ -228,7 +229,7 @@ public class WeaponController : MonoBehaviour
 
     private void PlayerShootSound()
     {
-        audioSource.clip = AK47SoundClip;
+        audioSource.clip = ak47SoundClip;
         audioSource.Play();
     }
 
