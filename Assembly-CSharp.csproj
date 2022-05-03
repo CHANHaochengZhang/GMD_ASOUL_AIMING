@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\PlayerMovements.cs" />
      <Compile Include="Assets\Scripts\WeaponController.cs" />
      <Compile Include="Assets\Scripts\WeaponSway.cs" />
+     <None Include="Assets\Models\yangTuo\使用规则 请读我.txt" />
      <None Include="Assets\Test\Materials\ColorSpecReflexive.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Code/UnityProject/Youtube_imphenzia/FPS_AIM_Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
