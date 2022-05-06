@@ -16,8 +16,13 @@ public class YangtuoController : MonoBehaviour
    {
        health = maxHealth;
        Debug.Log("health is "+health);
-       health = 1;
+       health = 0;
        Debug.Log("health is "+health);
+       if (health<=0)
+       {
+           Destroy(gameObject);
+           onEnemyKilled?.Invoke(this);
+       }
        
    }
 
