@@ -17,7 +17,7 @@ public class YangtuoGenerator : MonoBehaviour
         StartCoroutine(enemyWave());
     }
 
-    private void generateEnemy()
+    private void generateEnemy(GameObject yangtuo)
     {
         Debug.Log("generateEnemy called");
         GameObject a = Instantiate(yangtuo) as GameObject;
@@ -37,8 +37,7 @@ public class YangtuoGenerator : MonoBehaviour
         {
             Debug.Log("wair for 1s");
             yield return new WaitForSeconds(spwanTime);
-      
-            generateEnemy();
+            generateEnemy(yangtuo);
         }
     }
     // Update is called once per frame

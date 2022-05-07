@@ -165,7 +165,7 @@ public class WeaponController : MonoBehaviour
                  
             //Add tag to the bullet
             bullet.tag = "ak47Bullet";
-            
+            Debug.Log(bullet.tag+"shot");
             //Remove gravity from the rifle bullet
                 bullet.GetComponent<Rigidbody>().useGravity = false;
             
