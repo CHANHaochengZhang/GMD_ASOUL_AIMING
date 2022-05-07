@@ -61,6 +61,7 @@
      <Compile Include="Assets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Misc\LookAtCamera.cs" />
      <Compile Include="Assets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Weapon_Scripts\HandgunScriptLPFP.cs" />
      <Compile Include="Assets\Scripts\WeaponSway.cs" />
+     <Compile Include="Assets\Scripts\YangtuoGenerator.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Models\ch_xiangwan\spa\desktop.files.json" />
