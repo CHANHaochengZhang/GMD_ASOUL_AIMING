@@ -8,6 +8,8 @@ public class WeaponController : MonoBehaviour
 
 
 {
+
+    
     public PlayerMovements pm;
     
     public Transform shooterPoint;
@@ -158,7 +160,11 @@ public class WeaponController : MonoBehaviour
 
             //Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = 
-                bullet.transform.forward * 100;
+                bullet.transform.forward * 50;
+            
+            //Remove gravity from the rifle bullet
+                bullet.GetComponent<Rigidbody>().useGravity = false;
+            
 
             //Spawn casing prefab at spawnpoint
             Instantiate (Prefabs.casingPrefab, 
