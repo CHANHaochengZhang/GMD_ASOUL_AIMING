@@ -161,10 +161,15 @@ public class WeaponController : MonoBehaviour
             //Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = 
                 bullet.transform.forward * 50;
+       
+                 
+            //Add tag to the bullet
+            bullet.tag = "ak47Bullet";
             
             //Remove gravity from the rifle bullet
                 bullet.GetComponent<Rigidbody>().useGravity = false;
             
+       
 
             //Spawn casing prefab at spawnpoint
             Instantiate (Prefabs.casingPrefab, 
@@ -244,7 +249,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(1) && !isReload && !pm.isRun)
         {
             //aim,change crosshair pov 
-            Debug.Log("!!!!!!!!!aim");
+            //Debug.Log("!!!!!!!!!aim");
             isAiming = true;
             anim.SetBool("Aim",true);
             crossHairUI.gameObject.SetActive(false);

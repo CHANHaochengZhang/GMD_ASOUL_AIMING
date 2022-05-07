@@ -16,7 +16,7 @@ public class YangtuoController : MonoBehaviour
    {
        health = maxHealth;
        Debug.Log("health is "+health);
-       health = 0;
+       health = 3;
        Debug.Log("health is "+health);
        if (health<=0)
        {
@@ -24,6 +24,16 @@ public class YangtuoController : MonoBehaviour
            onEnemyKilled?.Invoke(this);
        }
        
+   }
+
+   private void OnTriggerEnter(Collider c)
+   {
+       if (c.tag=="ak47Bullet")
+       {
+           Debug.Log("hit yangtuo!!");
+           takeDamage(1);
+       }
+       Debug.Log("hit yangtuo but not succeed!");
    }
 
    public void takeDamage(float damageAmount)
