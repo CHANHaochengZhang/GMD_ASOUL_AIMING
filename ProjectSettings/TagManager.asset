@@ -7,6 +7,8 @@ TagManager:
   - Target
   - Metal
   - ExplosiveBarrel
+  - Yangtuo
+  - ak47Bullet
   layers:
   - Default
   - TransparentFX
