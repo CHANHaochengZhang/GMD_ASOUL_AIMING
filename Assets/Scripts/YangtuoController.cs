@@ -9,11 +9,14 @@ public class YangtuoController : MonoBehaviour
   private static event Action<YangtuoController> onEnemyKilled;
   private float health, maxHealth = 10f;
   private float moveSpeed = 5f;
-  private Transform target;
+  private Transform playerDirection;
+  private PlayerMovements player;
   private Vector2 moveDirection;
 
    void Start()
    {
+       /*GameObject a = Instantiate(player) as GameObject;*/
+       player = GameObject.FindObjectOfType<PlayerMovements> ();
        health = maxHealth;
        Debug.Log("health is "+health);
        health = 3;
@@ -25,6 +28,16 @@ public class YangtuoController : MonoBehaviour
        }
        
    }
+
+   private void Update()
+   {
+       playerDirection = player.transform;
+       // Not giving the desired results
+       Vector3 lookAt = playerDirection.position;
+       lookAt.y = transform.position.y;
+       transform.LookAt(lookAt);
+   }
+
 
    private void OnTriggerEnter(Collider c)
    {
