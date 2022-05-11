@@ -28,8 +28,13 @@ public class PlayerMovements : MonoBehaviour
     private Transform groundCheck;
     private float groundDistance = 0.1f;
     public LayerMask groundMask;
+
     
     
+    public event Action<int, int> updateHealthBarOnAttack;
+
+    public int maxHealth;
+
     public Vector3 moveDirection;// move dir
     private Camera fpsCamera;
     [Header("Key bind setting")]
@@ -163,4 +168,19 @@ public class PlayerMovements : MonoBehaviour
         }
         
     }
+
+
+    public void TakeDamage(int attacker)
+    {
+        
+        /*int damage = Mathf.Max(attacker.CurrentDamage())*/
+
+        int damage = attacker;
+        int currentHealth = maxHealth - damage;
+        
+        updateHealthBarOnAttack?.Invoke(currentHealth,maxHealth);
+        
+        
+    }
+    
 }

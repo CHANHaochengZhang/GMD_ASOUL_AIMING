@@ -25,6 +25,7 @@ public class YangtuoGenerator : MonoBehaviour
         int x = rd.Next(-50, 40);
         int y = rd.Next(0, 25);
         int z = rd.Next(-50, 50);
+        y = 0;
         a.transform.position = new Vector3(x, y, z);
         Debug.Log("yangtuo position is: ("+x+","+y+","+z+")");
     }

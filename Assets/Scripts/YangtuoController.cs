@@ -8,7 +8,7 @@ public class YangtuoController : MonoBehaviour
 {
   private static event Action<YangtuoController> onEnemyKilled;
   private float health, maxHealth = 10f;
-  private float moveSpeed = 5f;
+  private float moveSpeed = 0.03f;
   private Transform playerDirection;
   private PlayerMovements player;
   private Vector2 moveDirection;
@@ -36,6 +36,14 @@ public class YangtuoController : MonoBehaviour
        Vector3 lookAt = playerDirection.position;
        lookAt.y = transform.position.y;
        transform.LookAt(lookAt);
+       var distance = (playerDirection.position - transform.position).magnitude;
+       /*Debug.Log("distance is "+distance);*/
+       if (distance>=2)
+       {
+            transform.Translate(Vector3.forward * moveSpeed);
+            /*Debug.Log(" moving ");*/
+       }
+       
    }
 
 
