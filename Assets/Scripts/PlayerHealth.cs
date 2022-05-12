@@ -16,13 +16,13 @@ public class PlayerHealth : MonoBehaviour
     private float maxHealth;
     private void Start()
     {
-        currentHealth = 50;
+        currentHealth = 80;
         maxHealth = 100;
     }
 
     private void Update()
     {
-        Debug.Log("----------health");
+       
         healthNumber.text = currentHealth + "%";
         effects();
         HealthBarFiller();
@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
     void HealthBarFiller()
     {
         healthSlider.fillAmount = currentHealth / maxHealth;
-        Debug.Log("health is "+currentHealth / maxHealth);
+       
     }
 
 
@@ -53,17 +53,16 @@ public class PlayerHealth : MonoBehaviour
 
       
     }
-    
-    
-    public void UpdateHealthBar(int damage,int maxDamage)
+
+
+    public void takeDamage(float damage)
     {
-        if (currentHealth>0)
-        {
-            currentHealth  = currentHealth-damage;
-        }
-        
-        
+        Debug.Log("player takes damage");
+        currentHealth = currentHealth - damage;
+        Debug.Log("health is "+currentHealth / maxHealth);
     }
+    
+    
 
 
 }

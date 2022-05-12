@@ -9,6 +9,7 @@ TagManager:
   - ExplosiveBarrel
   - Yangtuo
   - ak47Bullet
+  - Plane
   layers:
   - Default
   - TransparentFX

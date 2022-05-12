@@ -36,7 +36,7 @@ public class YangtuoGenerator : MonoBehaviour
         for (int i = 0; i < 300; i++)
       
         {
-            Debug.Log("wair for 1s");
+            Debug.Log("wait for 1s");
             yield return new WaitForSeconds(spwanTime);
             generateEnemy(yangtuo);
         }
