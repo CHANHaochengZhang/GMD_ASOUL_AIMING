@@ -19,6 +19,12 @@ public class YangtuoController : MonoBehaviour
   private float awakeDistance;
   private float timer;
   public float timeBetweenAttacks = 3f;
+  
+  [Header("Sound")] 
+  [SerializeField]private AudioSource audioSource;
+  public AudioClip attackSound;
+  public AudioClip runningSound;
+  
    void Start()
    {
        /*GameObject a = Instantiate(player) as GameObject;*/
@@ -28,7 +34,7 @@ public class YangtuoController : MonoBehaviour
        timer = timeBetweenAttacks;
        targetPlayer = GameObject.FindWithTag("Player");
        targetPlayer = GameObject.Find("Player");
-      
+       audioSource = GetComponent<AudioSource>();
        health = maxHealth;
        Debug.Log("health is "+health);
        health = 3;
@@ -92,6 +98,7 @@ public class YangtuoController : MonoBehaviour
        Debug.Log("Damage given to: "+gameObject.tag);
        if (gameObject.tag=="Player")
        {
+           PlayerAttackSound();
            gameObject.GetComponent<PlayerHealth>().takeDamage(attack);
        }
        
@@ -108,4 +115,15 @@ public class YangtuoController : MonoBehaviour
            onEnemyKilled?.Invoke(this);
        }
    }
+   
+   
+   private void PlayerAttackSound()
+   {
+       audioSource.clip = attackSound;
+       audioSource.Play();
+       
+   }
+   
+   
+   
 }
