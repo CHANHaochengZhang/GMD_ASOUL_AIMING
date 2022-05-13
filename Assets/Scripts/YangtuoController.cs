@@ -19,6 +19,7 @@ public class YangtuoController : MonoBehaviour
   private float awakeDistance;
   private float timer;
   public float timeBetweenAttacks = 3f;
+  private Animator animator = null;
   
   [Header("Sound")] 
   [SerializeField]private AudioSource audioSource;
@@ -32,6 +33,7 @@ public class YangtuoController : MonoBehaviour
        distance=100;
        awakeDistance = 3;
        timer = timeBetweenAttacks;
+       animator = GetComponent<Animator>();
        targetPlayer = GameObject.FindWithTag("Player");
        targetPlayer = GameObject.Find("Player");
        audioSource = GetComponent<AudioSource>();
@@ -60,9 +62,17 @@ public class YangtuoController : MonoBehaviour
        
        if (distance>=2)
        {
+           /*animator.Play("Move");*/
+           animator.SetInteger("Move",1);
+         
             transform.Translate(Vector3.forward * moveSpeed);
             /*Debug.Log(" moving ");*/
        }
+       else
+       {
+           animator.SetInteger("Move",0);
+       }
+      
        
    }
 
@@ -99,6 +109,7 @@ public class YangtuoController : MonoBehaviour
        if (gameObject.tag=="Player")
        {
            PlayerAttackSound();
+           /*animator.SetInteger("Attack",1);*/
            gameObject.GetComponent<PlayerHealth>().takeDamage(attack);
        }
        
