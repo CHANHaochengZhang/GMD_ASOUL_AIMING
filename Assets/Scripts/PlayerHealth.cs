@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -26,6 +27,10 @@ public class PlayerHealth : MonoBehaviour
         healthNumber.text = currentHealth + "%";
         effects();
         HealthBarFiller();
+        if (currentHealth<=0)
+        {
+            SceneManager.LoadScene ("StartMenu");
+        }
     }
     
     //calculate percentage to adjust the health slider
