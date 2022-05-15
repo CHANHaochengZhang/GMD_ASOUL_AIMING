@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class YangtuoController : MonoBehaviour
 {
   private static event Action<YangtuoController> onEnemyKilled;
   private float health, maxHealth = 10f;
-  private float moveSpeed = 0.003f;
+  private float moveSpeed = 0.03f;
   private Transform playerDirection;
   private GameObject targetPlayer;
   private PlayerMovements player;
@@ -25,6 +26,7 @@ public class YangtuoController : MonoBehaviour
   private Rigidbody body;
   private RaycastHit hit;
   private float detectDistance;
+  private Scene scene;
   public GameObject enemyRangeAttack;
 
 
@@ -44,13 +46,16 @@ public class YangtuoController : MonoBehaviour
        targetPlayer = GameObject.FindWithTag("Player");
        targetPlayer = GameObject.Find("Player");
       
+      
+       
        audioSource = GetComponent<AudioSource>();
        health = maxHealth;
        body = transform.GetComponent<Rigidbody>();
        
-       Debug.Log("health is "+health);
+    
+     
        health = 3;
-       Debug.Log("health is "+health);
+    
        if (health<=0)
        {
            Destroy(gameObject);
@@ -61,18 +66,26 @@ public class YangtuoController : MonoBehaviour
 
    private void Update()
    {
-       
+       body.AddForce(Vector3.down*9);
+       scene = SceneManager.GetActiveScene();
        playerDirection = player.transform;
        // Not giving the desired results
        Vector3 lookAt = playerDirection.position;
        lookAt.y = transform.position.y;
        transform.LookAt(lookAt);
        distance = (playerDirection.position - transform.position).magnitude;
-     Debug.Log("yangtuo distance is "+distance);
+      
+       if(scene.name=="SceneTwo"){
        FindTarget(distance,awakeDistance,targetPlayer);
        MoveToPlayer();
+       
        /*StartCoroutine(RangeAttack());*/
+       }
 
+       if (scene.name=="SceneOne")
+       {
+           StartCoroutine(RangeAttack());
+       }
    }
 
 
@@ -148,7 +161,6 @@ public class YangtuoController : MonoBehaviour
        RaycastHit hit;
        if(Physics.Raycast(transform.position,Vector3.down,out hit))
        {
-            
            /*
            body.AddForce(Vector3.up * 4);*/
            body.AddForce(0,5,0);
@@ -162,12 +174,20 @@ public class YangtuoController : MonoBehaviour
 
        for (int i = 0; i < 300; i++)
        {
-           yield return new WaitForSeconds(5f);
+           animator.SetInteger("Attack",0);
+           Debug.Log("----range attacking---");
+           yield return new WaitForSeconds(1f);
            GameObject instantBullet = Instantiate(enemyRangeAttack, transform.position, transform.rotation) as GameObject;;
 
            Rigidbody rigidbody = instantBullet.GetComponent<Rigidbody>();
 
-           rigidbody.velocity = transform.forward * 2f;
+           var x = transform.position.x;
+           var y = transform.position.y;
+           var z = transform.position.z;
+           
+           instantBullet.transform.position = new Vector3(x,y+2,z);
+           animator.SetInteger("Attack",1);
+           rigidbody.velocity = transform.forward * 40f;
        }
        
 

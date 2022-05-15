@@ -65,7 +65,7 @@ public class NPCXiangwanController : MonoBehaviour
     void Update()
     {
         distance = (playerDirection.position - transform.position).magnitude;
-        Debug.Log("xiang wan distance is "+distance);
+    
         if (distance<=5f)
         {
            

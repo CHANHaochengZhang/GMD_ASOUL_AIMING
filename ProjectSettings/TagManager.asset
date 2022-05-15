@@ -11,6 +11,7 @@ TagManager:
   - ak47Bullet
   - Plane
   - NPC
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

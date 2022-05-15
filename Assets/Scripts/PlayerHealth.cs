@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         HealthBarFiller();
         if (currentHealth<=0)
         {
-            SceneManager.LoadScene ("StartMenu");
+            SceneManager.LoadScene ("SceneDeath");
         }
     }
     

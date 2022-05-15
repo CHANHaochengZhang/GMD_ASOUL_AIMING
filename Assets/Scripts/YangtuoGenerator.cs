@@ -34,7 +34,6 @@ public class YangtuoGenerator : MonoBehaviour
     IEnumerator enemyWave()
     {
         for (int i = 0; i < 300; i++)
-      
         {
             Debug.Log("wait for 1s");
             yield return new WaitForSeconds(spwanTime);
