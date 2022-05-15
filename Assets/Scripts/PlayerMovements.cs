@@ -12,7 +12,7 @@ public class PlayerMovements : MonoBehaviour
     public float walkSpeed = 6f; //Move speed
     public float runSpeed = 10f;
     private float speed;
-    
+   
     public bool isRun;
     public bool isJump;
     public bool isWalk;
@@ -29,6 +29,7 @@ public class PlayerMovements : MonoBehaviour
     private float groundDistance = 0.1f;
     public LayerMask groundMask;
 
+    public Canvas guideCanvas;
     
     
     public event Action<int, int> updateHealthBarOnAttack;
@@ -55,7 +56,9 @@ public class PlayerMovements : MonoBehaviour
         fpsCamera = GetComponentInChildren<Camera>();
         groundCheck = GameObject.Find("Player/CheckGround").GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
+        
 
+        guideCanvas.enabled = false;
         sit = new Vector3(0, 1.4f, 0);
         stand = new Vector3(0, 1.6f, 0);
     }
@@ -65,6 +68,7 @@ public class PlayerMovements : MonoBehaviour
     {
         CheckGround();
         Move();
+        CheckGuideButton();
     }
 
     public Vector3 sit;
@@ -170,6 +174,18 @@ public class PlayerMovements : MonoBehaviour
     }
 
 
+    public void CheckGuideButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            guideCanvas.enabled = true;
+        }
+        else if(Input.GetKeyUp(KeyCode.Tab))
+        {
+            guideCanvas.enabled = false;
+        }
+      
+    }
     public void TakeDamage(int attacker)
     {
         

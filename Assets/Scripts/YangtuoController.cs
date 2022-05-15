@@ -68,7 +68,7 @@ public class YangtuoController : MonoBehaviour
        lookAt.y = transform.position.y;
        transform.LookAt(lookAt);
        distance = (playerDirection.position - transform.position).magnitude;
-     
+     Debug.Log("yangtuo distance is "+distance);
        FindTarget(distance,awakeDistance,targetPlayer);
        MoveToPlayer();
        /*StartCoroutine(RangeAttack());*/
