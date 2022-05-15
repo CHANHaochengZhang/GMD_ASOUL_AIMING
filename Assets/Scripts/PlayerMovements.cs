@@ -30,7 +30,7 @@ public class PlayerMovements : MonoBehaviour
     public LayerMask groundMask;
 
     public Canvas guideCanvas;
-    
+    public Canvas enemyHealthCanvas;
     
     public event Action<int, int> updateHealthBarOnAttack;
 
@@ -56,8 +56,9 @@ public class PlayerMovements : MonoBehaviour
         fpsCamera = GetComponentInChildren<Camera>();
         groundCheck = GameObject.Find("Player/CheckGround").GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
-        
 
+
+        enemyHealthCanvas.enabled = false;
         guideCanvas.enabled = false;
         sit = new Vector3(0, 1.4f, 0);
         stand = new Vector3(0, 1.6f, 0);

@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class YangtuoController : MonoBehaviour
 {
   private static event Action<YangtuoController> onEnemyKilled;
-  private float health, maxHealth = 10f;
+  private float health, maxHealth = 1000;
   private float moveSpeed = 0.03f;
   private Transform playerDirection;
   private GameObject targetPlayer;
@@ -28,6 +30,12 @@ public class YangtuoController : MonoBehaviour
   private float detectDistance;
   private Scene scene;
   public GameObject enemyRangeAttack;
+ 
+  
+  public Image healthSlider;
+
+  public TextMeshProUGUI healthNumber;
+  
 
 
   [Header("Sound")] 
@@ -37,6 +45,8 @@ public class YangtuoController : MonoBehaviour
   
    void Start()
    {
+       health = 800;
+       maxHealth = 1000;
        /*GameObject a = Instantiate(player) as GameObject;*/
        player = GameObject.FindObjectOfType<PlayerMovements> ();
        distance=100;

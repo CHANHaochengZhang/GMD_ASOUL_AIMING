@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Utils;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,18 +17,20 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
 
     private float maxHealth;
+
+    private HealthManager healthManager;
     private void Start()
     {
         currentHealth = 80;
         maxHealth = 100;
+        healthManager = new HealthManager();
     }
 
     private void Update()
     {
-       
         healthNumber.text = currentHealth + "%";
         effects();
-        HealthBarFiller();
+        healthManager.HealthBarFiller(healthSlider, currentHealth,  maxHealth);
         if (currentHealth<=0)
         {
             SceneManager.LoadScene ("SceneDeath");
@@ -34,11 +38,10 @@ public class PlayerHealth : MonoBehaviour
     }
     
     //calculate percentage to adjust the health slider
-    void HealthBarFiller()
+    /*void HealthBarFiller()
     {
         healthSlider.fillAmount = currentHealth / maxHealth;
-       
-    }
+    }*/
 
 
     //add effects to health bar by health 
@@ -55,8 +58,6 @@ public class PlayerHealth : MonoBehaviour
             healthNumber.color = Color.red;
             healthSlider.color = Color.red;
         }
-
-      
     }
 
 

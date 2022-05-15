@@ -17637,6 +17637,11 @@ PrefabInstance:
       propertyPath: crossHairUI
       value: 
       objectReference: {fileID: 505975488}
+    - target: {fileID: 3440158497340984460, guid: 7af1155d2a7b10e448d593879631dac6,
+        type: 3}
+      propertyPath: enemyHealthCanvas
+      value: 
+      objectReference: {fileID: 1139812406}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af1155d2a7b10e448d593879631dac6, type: 3}
 --- !u!1001 &1400863731
