@@ -31,10 +31,11 @@ public class PlayerHealth : MonoBehaviour
         healthNumber.text = _currentHealth + "%";
         effects();
         healthManager.HealthBarFiller(healthSlider, _currentHealth,  maxHealth);
-        Debug.Log("healthSlider "+healthSlider.fillAmount);
+   
         if (_currentHealth<=0)
         {
             SceneManager.LoadScene ("SceneDeath");
+            _currentHealth = 100;
         }
     }
     

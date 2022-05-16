@@ -5,17 +5,17 @@ using System.ComponentModel.Design.Serialization;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 using UnityEngine.UI;
 using Utils;
 
 public class YangtuoKingController : MonoBehaviour
 {
 
-    private float currentHealth;
-
-    private float maxHealth;
+  private float currentHealth;
+  private float maxHealth;
   private float moveSpeed = 0.03f;
   private Transform playerDirection;
   private GameObject targetPlayer;
@@ -35,10 +35,13 @@ public class YangtuoKingController : MonoBehaviour
   private Scene scene;
   public GameObject enemyRangeAttack;
   private DistanceCalculator distanceCalculator;
-
   public Image healthSlider;
-
   private bool isFight = false;
+  private bool fightInitiated = false;
+  
+  
+  public static AsyncOperation async;
+  
   
   
   private HealthManager healthManager;
@@ -48,11 +51,13 @@ public class YangtuoKingController : MonoBehaviour
   [Header("Sound")] 
   [SerializeField]private AudioSource audioSource;
   public AudioClip attackSound;
-  public AudioClip runningSound;
+
   
    void Start()
    {
       
+       async = SceneManager.LoadSceneAsync("SceneTwo");
+       async.allowSceneActivation = false;
        currentHealth = 1000;
        maxHealth = 1000;
        /*GameObject a = Instantiate(player) as GameObject;*/
@@ -74,7 +79,7 @@ public class YangtuoKingController : MonoBehaviour
 
    private void Update()
    {
-       Debug.Log(currentHealth+"  "+maxHealth + currentHealth/maxHealth);
+      
        healthSlider.fillAmount = currentHealth / maxHealth;
        body.AddForce(Vector3.down*9);
        scene = SceneManager.GetActiveScene();
@@ -94,13 +99,14 @@ public class YangtuoKingController : MonoBehaviour
 
        if (currentHealth<=500)
        {
-           SceneManager.LoadScene ("SceneTwo");
+           async.allowSceneActivation = true;
        }
        /*StartCoroutine(RangeAttack());*/
        }
 
-       if (isFight == true)
+       if (fightInitiated)
        {
+           fightInitiated = false;
            StartCoroutine(RangeAttack());
        }
            
@@ -115,7 +121,11 @@ public class YangtuoKingController : MonoBehaviour
        if (c.tag=="ak47Bullet")
        {
            Debug.Log("hit yangtuo!!");
-           TakeDamage(5);
+           if (isFight)
+           {
+               TakeDamage(5);
+           }
+           
        }
       
    }
@@ -153,9 +163,9 @@ public class YangtuoKingController : MonoBehaviour
 
    IEnumerator RangeAttack()
    {
+       isFight = true;
        while (true)
        {
-           isFight = false;
            for (int i = 0; i < 30; i++)
            {
                Invoke("Shoot",1);
@@ -179,7 +189,7 @@ public class YangtuoKingController : MonoBehaviour
    var y = transform.position.y;
    var z = transform.position.z;
            
-   instantBullet.transform.position = new Vector3(x,y+2,z);
+   instantBullet.transform.position = new Vector3(x,y+4,z);
    /*animator.SetInteger("Attack",1);*/
    rigidbody.velocity = transform.forward * 40f;
 
@@ -199,13 +209,15 @@ public class YangtuoKingController : MonoBehaviour
 
    public void TakeDamage(float damageAmount)
    {
-       Debug.Log("Damage taken from player: "+damageAmount);
-       currentHealth= currentHealth-damageAmount;
-       Debug.Log("Current health: "+currentHealth);
-       if (currentHealth<=0)
+       if (isFight)
        {
-      
-           Destroy(gameObject);
+           
+           currentHealth= currentHealth-damageAmount;
+       
+           if (currentHealth<=0)
+           {
+               Destroy(gameObject);
+           }  
        }
    }
    
@@ -219,12 +231,7 @@ public class YangtuoKingController : MonoBehaviour
 
    public void StartFight()
    {
-       isFight = true;
-   }
-
-   public void Fight()
-   {
-       StartCoroutine(RangeAttack());
+       fightInitiated = true;
    }
    
 

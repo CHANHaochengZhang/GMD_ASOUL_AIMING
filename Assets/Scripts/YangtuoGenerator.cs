@@ -7,7 +7,7 @@ using Random = System.Random;
 
 public class YangtuoGenerator : MonoBehaviour
 {
-    private List<GameObject> list;
+    
     public GameObject yangtuo;
     public float spwanTime = 1.0f;
 
@@ -15,18 +15,17 @@ public class YangtuoGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        list = new List<GameObject>();
+       
         Debug.Log("generator starts");
-
-        //启动辅助线程 start a thread
+        // start a thread
         StartCoroutine(enemyWave());
     }
     
     void Update()
     {
-        if (killedNumber==30)
+        if (killedNumber==50)
         {
-            SceneManager.LoadScene("SceneOne");
+            SceneManager.LoadScene("VictoryScene");
         }
     }
 
@@ -35,10 +34,10 @@ public class YangtuoGenerator : MonoBehaviour
         Debug.Log("generateEnemy called");
         GameObject a = Instantiate(yangtuo) as GameObject;
         Random rd = new Random();
-        int x = rd.Next(-50, 40);
-        int y = rd.Next(0, 25);
-        int z = rd.Next(-50, 50);
-        y = 0;
+        int x = rd.Next(-35, 39);
+        int y = 1;
+        int z = rd.Next(-35, 35);
+        
         a.transform.position = new Vector3(x, y, z);
         Debug.Log("yangtuo position is: ("+x+","+y+","+z+")");
        
@@ -47,12 +46,12 @@ public class YangtuoGenerator : MonoBehaviour
     //generate enemies wave
     IEnumerator enemyWave()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 50; i++)
         {
             Debug.Log("wait for 1s");
             yield return new WaitForSeconds(spwanTime);
             generateEnemy(yangtuo);
-            list.Add(yangtuo);
+           
         }
         
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngineInternal;
 using Utils;
 
@@ -9,6 +10,8 @@ public class CanvasController : MonoBehaviour
 {
     private DistanceCalculator distanceCalculator;
 
+    private Scene scene;
+    
     private GameObject gameObjectNPC;
     
     private GameObject gameObjectEnemy;
@@ -42,7 +45,7 @@ public class CanvasController : MonoBehaviour
     /*private PlayerMovements player;*/
     private string[] mData =
     {
-        "Hi I'm xiangwan",
+        "Hi I'm Ava",
         "This was my home",
         "Until the white monster came",
         "its name is Yangtuo, it pretended to be friendly to us",
@@ -64,23 +67,37 @@ public class CanvasController : MonoBehaviour
         distanceCalculator = new DistanceCalculator();
         gameObjectNPC = GameObject.FindGameObjectWithTag("NPC");
         gameObjectEnemy = GameObject.FindGameObjectWithTag("Yangtuo");
-        enemyHealthCanvas.enabled = false;
         guideCanvas.enabled = false;
-        interactButtonCanvas.enabled = false;
         playerDirection = player.transform;
-        dialogueCanvas.enabled = false;
+        scene = SceneManager.GetActiveScene();
+       
+            enemyHealthCanvas.enabled = false;
+            interactButtonCanvas.enabled = false;
+            dialogueCanvas.enabled = false;
+        
+    
     
     }
 
     // Update is called once per frame
     void Update()
     {
+      
         distanceFromNPC = distanceCalculator.getDistance(transform.position, gameObjectNPC.transform.position);
         distanceFromEnemy = distanceCalculator.getDistance(transform.position, gameObjectEnemy.transform.position);
-        CheckInteractDistance();
+       
         CheckGuideButton();
-        CheckDialogue();
-        InitTheFight();
+        
+            CheckInteractDistance();
+            CheckDialogue();
+            InitTheFight();
+
+            if (scene.name == "SceneTwo")
+            {
+                enemyHealthCanvas.enabled = false;
+            }
+        
+      
     }
 
     public void CheckGuideButton()
@@ -97,16 +114,18 @@ public class CanvasController : MonoBehaviour
 
     public void CheckInteractDistance()
     {
-        if (distanceFromEnemy <= 4 || distanceFromNPC<=4 && isTalk == false && isFight == false)
+        if (distanceFromEnemy <= 4 || distanceFromNPC<=4)
         {
-            interactButtonCanvas.enabled = true;
+            if (isTalk == false && isFight == false)
+            {
+                interactButtonCanvas.enabled = true;
+            }
         }
         else
         {
             interactButtonCanvas.enabled = false;
         }
-       
- 
+        
     }
 
     public void CheckDialogue()
@@ -120,11 +139,14 @@ public class CanvasController : MonoBehaviour
                 Talk();
             }
         }
+        else if (distanceFromNPC>4)
+        {
+            dialogueCanvas.enabled = false;
+        }
     }
 
 
     // Start is called before the first frame update
-
     public void Talk()
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -140,6 +162,7 @@ public class CanvasController : MonoBehaviour
                     index = 0;
                     dialogueCanvas.enabled = false;
                     mText.text = "Ava:  " + mData[index];
+                    isTalk = false;
                 }
             }
         }
@@ -154,6 +177,7 @@ public class CanvasController : MonoBehaviour
                 Debug.Log("fight fight fight");
                 enemyHealthCanvas.enabled = true;
                 isFight = true;
+                Debug.Log("-----------------------------"+isFight);
                 Fight();
             }
         }

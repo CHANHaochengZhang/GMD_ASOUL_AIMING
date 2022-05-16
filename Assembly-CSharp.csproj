@@ -66,7 +66,6 @@
      <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
      <Compile Include="Assets\Scripts\Quit.cs" />
      <Compile Include="Assets\Scripts\KillCanvasController.cs" />
-     <Compile Include="Assets\Scripts\NPCXiangwanController.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
      <Compile Include="Assets\Scripts\DeathScene.cs" />
@@ -80,6 +79,7 @@
      <Compile Include="Assets\Scripts\Utils\HealthManager.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\YangtuoKingController.cs" />
+     <Compile Include="Assets\Scripts\VictoryController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Models\ch_xiangwan\spa\desktop.files.json" />
