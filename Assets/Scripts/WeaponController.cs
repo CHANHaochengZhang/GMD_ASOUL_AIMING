@@ -178,8 +178,8 @@ public class WeaponController : MonoBehaviour
                 Spawnpoints.casingSpawnPoint.transform.rotation);
             
             
-            Destroy(hitParticleEffect, 1);
-            Destroy(bulletHoleEffect, 3f);
+            Destroy(hitParticleEffect, 0.1f);
+            Destroy(bulletHoleEffect, 0.3f);
         }
 
         if (!isAiming)
