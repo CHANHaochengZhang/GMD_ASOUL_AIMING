@@ -13,13 +13,10 @@ public class EnemyRangeAttack : MonoBehaviour
     private void Start()
     {
         damage = 2;
-        Invoke("Destroy",lifeTime);
+        lifeTime = 40;
+        /*Invoke("Destroy",lifeTime);*/
     }
-
-    public void CheckHit()
-    {
-        
-    }
+    
     public void GiveDamage(GameObject gameObject)
     {
         Debug.Log("Damage given to: "+gameObject.tag);
