@@ -192,7 +192,7 @@ public class YangtuoKingController : MonoBehaviour
    instantBullet.transform.position = new Vector3(x,y+4,z);
    /*animator.SetInteger("Attack",1);*/
    rigidbody.velocity = transform.forward * 40f;
-
+   Destroy(gameObject,3);
    }
    
    public void GiveDamage(GameObject gameObject)
