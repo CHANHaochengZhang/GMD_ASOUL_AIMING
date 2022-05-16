@@ -29,8 +29,6 @@ public class PlayerMovements : MonoBehaviour
     private float groundDistance = 0.1f;
     public LayerMask groundMask;
 
-    public Canvas guideCanvas;
-    public Canvas enemyHealthCanvas;
     
     public event Action<int, int> updateHealthBarOnAttack;
 
@@ -58,8 +56,8 @@ public class PlayerMovements : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
 
-        enemyHealthCanvas.enabled = false;
-        guideCanvas.enabled = false;
+
+        
         sit = new Vector3(0, 1.4f, 0);
         stand = new Vector3(0, 1.6f, 0);
     }
@@ -69,7 +67,7 @@ public class PlayerMovements : MonoBehaviour
     {
         CheckGround();
         Move();
-        CheckGuideButton();
+       
     }
 
     public Vector3 sit;
@@ -175,18 +173,7 @@ public class PlayerMovements : MonoBehaviour
     }
 
 
-    public void CheckGuideButton()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            guideCanvas.enabled = true;
-        }
-        else if(Input.GetKeyUp(KeyCode.Tab))
-        {
-            guideCanvas.enabled = false;
-        }
-      
-    }
+   
     public void TakeDamage(int attacker)
     {
         

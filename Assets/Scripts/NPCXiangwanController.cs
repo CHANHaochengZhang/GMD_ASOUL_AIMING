@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ public class NPCXiangwanController : MonoBehaviour
     
     private bool isTalk = false;
 
-    /*public GameObject player;*/
+    /*public GameObject player;#1#
     
     private Transform playerDirection;
 
@@ -24,7 +25,7 @@ public class NPCXiangwanController : MonoBehaviour
 
     public float distance=10f;
    
-    /*private PlayerMovements player;*/
+    /*private PlayerMovements player;#1#
 
     
 
@@ -56,8 +57,8 @@ public class NPCXiangwanController : MonoBehaviour
         // animator.SetInteger("Talk",0);
         //
         // animator.SetInteger("Talk",1);
-        /*mText.text="NPC:"+mData[index];*/
-        /*index=index+1;*/
+        /*mText.text="NPC:"+mData[index];#1#
+        /*index=index+1;#1#
 
     }
 
@@ -74,8 +75,8 @@ public class NPCXiangwanController : MonoBehaviour
                 canvas.enabled = true;
                 isTalk = true;
                 Talk();
-                /*StartCoroutine(TalkStart());*/
-                /*TalkStart();*/
+                /*StartCoroutine(TalkStart());#1#
+                /*TalkStart();#1#
             }
         }
         else
@@ -89,13 +90,13 @@ public class NPCXiangwanController : MonoBehaviour
     {
         if(isTalk)
 {
-              /*//禁用系统鼠标指针
+              /#1#/禁用系统鼠标指针
                 Cursor.visible = true;
                 Rect mRect=new Rect(Input.mousePosition.x-mTalkIcon.width,
                     Screen.height-Input.mousePosition.y-mTalkIcon.height,
                     mTalkIcon.width,mTalkIcon.height);
               //绘制自定义鼠标指针
-                GUI.DrawTexture(mRect,mTalkIcon);*/
+                GUI.DrawTexture(mRect,mTalkIcon);#1#
 }
     }
 
@@ -109,15 +110,15 @@ public class NPCXiangwanController : MonoBehaviour
                 Debug.Log("talking---number---");
                 yield return new WaitForSeconds(0.1f);
                 mText.text = mData[index];
-                /*Cursor.visible = true;#1#
+                /*Cursor.visible = true;#2#
             }
             else
             {
                 yield return new WaitForSeconds(0.1f);
             }
-        }*/
+        }#1#
        
-    /*}*/
+    /*}#1#
   
     
     public void Talk()
@@ -141,3 +142,4 @@ public class NPCXiangwanController : MonoBehaviour
     
     
 }
+*/

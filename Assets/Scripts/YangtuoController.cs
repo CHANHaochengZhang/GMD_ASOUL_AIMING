@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Utils;
 
 public class YangtuoController : MonoBehaviour
 {
-  private static event Action<YangtuoController> onEnemyKilled;
+  private delegate void  OnEnemyKilled();
   private float health, maxHealth = 1000;
   private float moveSpeed = 0.03f;
   private Transform playerDirection;
@@ -30,8 +32,8 @@ public class YangtuoController : MonoBehaviour
   private float detectDistance;
   private Scene scene;
   public GameObject enemyRangeAttack;
- 
-  
+  private DistanceCalculator distanceCalculator;
+
   public Image healthSlider;
 
   public TextMeshProUGUI healthNumber;
@@ -61,15 +63,14 @@ public class YangtuoController : MonoBehaviour
        audioSource = GetComponent<AudioSource>();
        health = maxHealth;
        body = transform.GetComponent<Rigidbody>();
-       
-    
+       distanceCalculator = new DistanceCalculator();
      
        health = 3;
     
        if (health<=0)
        {
            Destroy(gameObject);
-           onEnemyKilled?.Invoke(this);
+  
        }
        
    }
@@ -83,7 +84,8 @@ public class YangtuoController : MonoBehaviour
        Vector3 lookAt = playerDirection.position;
        lookAt.y = transform.position.y;
        transform.LookAt(lookAt);
-       distance = (playerDirection.position - transform.position).magnitude;
+       
+       distance = distanceCalculator.getDistance(playerDirection.position,transform.position);
       
        if(scene.name=="SceneTwo"){
        FindTarget(distance,awakeDistance,targetPlayer);
@@ -94,7 +96,7 @@ public class YangtuoController : MonoBehaviour
 
        if (scene.name=="SceneOne")
        {
-           StartCoroutine(RangeAttack());
+           /*StartCoroutine(RangeAttack());*/
        }
    }
 
@@ -129,28 +131,7 @@ public class YangtuoController : MonoBehaviour
 
    public void MoveToPlayer()
    {
-
-       /*
-       if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hit, 10f))
-       {
-           //往该角色提高半米的位置的前方发射一条10米的射线，如果有射中障碍物层级的物体
-           float rotateDir = Vector3.Dot(transform.right, hit.normal); //获取角色右方向与击中位置的法线的点乘结果，主要用于判断障碍物位置，是在角色左边还是右边
-           Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * 7, Color.red);
-           Debug.DrawRay(hit.point, hit.normal, Color.blue);
-           if (rotateDir >= 0)
-           {
-               //如果大于等于0
-               transform.Rotate(transform.up * 90 * Time.deltaTime); //则往顺时针方向以90度每秒的方向转动
-               /*lookReTime = 0; //避免在躲避障碍物的时候，还会朝向玩家,易发生相反转向#1#
-           }
-           else
-           {
-               transform.Rotate(transform.up * -90 * Time.deltaTime); //则往逆时针方向以90度每秒的方向转动
-               /*lookReTime = 0;#1#
-           }
-           */
-
-           if (distance >= 2)
+       if (distance >= 2)
            {
                /*animator.Play("Move");*/
                animator.SetInteger("Move", 1);
@@ -227,7 +208,6 @@ public class YangtuoController : MonoBehaviour
        if (health<=0)
        {
            Destroy(gameObject);
-           onEnemyKilled?.Invoke(this);
        }
    }
    

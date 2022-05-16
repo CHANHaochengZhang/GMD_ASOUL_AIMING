@@ -8,6 +8,7 @@ public class YangtuoGenerator : MonoBehaviour
 {
     public GameObject yangtuo;
     public float spwanTime = 1.0f;
+    public int numberKilled = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,11 @@ public class YangtuoGenerator : MonoBehaviour
 
         //启动辅助线程 start a thread
         StartCoroutine(enemyWave());
+    }
+    
+    void Update()
+    {
+        yangtuo.onEne
     }
 
     private void generateEnemy(GameObject yangtuo)
@@ -41,8 +47,5 @@ public class YangtuoGenerator : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
