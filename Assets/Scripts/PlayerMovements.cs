@@ -12,7 +12,7 @@ public class PlayerMovements : MonoBehaviour
     public float walkSpeed = 6f; //Move speed
     public float runSpeed = 10f;
     private float speed;
-    
+   
     public bool isRun;
     public bool isJump;
     public bool isWalk;
@@ -28,8 +28,12 @@ public class PlayerMovements : MonoBehaviour
     private Transform groundCheck;
     private float groundDistance = 0.1f;
     public LayerMask groundMask;
+
     
-    
+    public event Action<int, int> updateHealthBarOnAttack;
+
+    public int maxHealth;
+
     public Vector3 moveDirection;// move dir
     private Camera fpsCamera;
     [Header("Key bind setting")]
@@ -51,6 +55,9 @@ public class PlayerMovements : MonoBehaviour
         groundCheck = GameObject.Find("Player/CheckGround").GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
 
+
+
+        
         sit = new Vector3(0, 1.4f, 0);
         stand = new Vector3(0, 1.6f, 0);
     }
@@ -60,6 +67,7 @@ public class PlayerMovements : MonoBehaviour
     {
         CheckGround();
         Move();
+       
     }
 
     public Vector3 sit;
@@ -163,4 +171,6 @@ public class PlayerMovements : MonoBehaviour
         }
         
     }
+    
+    
 }

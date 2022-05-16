@@ -7,6 +7,13 @@ TagManager:
   - Target
   - Metal
   - ExplosiveBarrel
+  - Yangtuo
+  - ak47Bullet
+  - Plane
+  - NPC
+  - EnemyAttack
+  - Fire
+  - EnemyCounter
   layers:
   - Default
   - TransparentFX

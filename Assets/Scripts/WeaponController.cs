@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,6 +9,8 @@ public class WeaponController : MonoBehaviour
 
 
 {
+
+    
     public PlayerMovements pm;
     
     public Transform shooterPoint;
@@ -15,7 +18,7 @@ public class WeaponController : MonoBehaviour
 
     public int bulletsMag = 30;//射击的位置
     public int range = 100;//射程
-    public int bulletLeft = 90;//备弹
+    public int bulletLeft = 720;//备弹
     public int currentBullets;//当前子弹数量
     public float fireRate = 0.1f;
     private float fireTimer;//
@@ -158,7 +161,16 @@ public class WeaponController : MonoBehaviour
 
             //Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = 
-                bullet.transform.forward * 100;
+                bullet.transform.forward * 150;
+       
+                 
+            //Add tag to the bullet
+            bullet.tag = "ak47Bullet";
+            Debug.Log(bullet.tag+"shot");
+            //Remove gravity from the rifle bullet
+                bullet.GetComponent<Rigidbody>().useGravity = false;
+          
+       
 
             //Spawn casing prefab at spawnpoint
             Instantiate (Prefabs.casingPrefab, 
@@ -166,8 +178,8 @@ public class WeaponController : MonoBehaviour
                 Spawnpoints.casingSpawnPoint.transform.rotation);
             
             
-            Destroy(hitParticleEffect, 1);
-            Destroy(bulletHoleEffect, 3f);
+            Destroy(hitParticleEffect, 0.1f);
+            Destroy(bulletHoleEffect, 0.3f);
         }
 
         if (!isAiming)
@@ -238,7 +250,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(1) && !isReload && !pm.isRun)
         {
             //aim,change crosshair pov 
-            Debug.Log("!!!!!!!!!aim");
+            //Debug.Log("!!!!!!!!!aim");
             isAiming = true;
             anim.SetBool("Aim",true);
             crossHairUI.gameObject.SetActive(false);
@@ -255,5 +267,18 @@ public class WeaponController : MonoBehaviour
         }
 
         
+    }
+
+
+    private void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.tag == "Yangtuo")
+        {
+            if ( c.gameObject.GetComponent<YangtuoController>().GetCurrentHealth() == 1)
+            {
+            
+            }
+          
+        }
     }
 }
