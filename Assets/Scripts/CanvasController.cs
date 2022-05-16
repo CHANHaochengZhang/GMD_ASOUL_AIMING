@@ -25,6 +25,8 @@ public class CanvasController : MonoBehaviour
     
     public Canvas enemyHealthCanvas;
 
+  
+
     private bool isFight = false;
     
     private bool isTalk = false;
@@ -156,11 +158,10 @@ public class CanvasController : MonoBehaviour
             }
         }
     }
-
-
+    
     public void Fight()
     {
-        
+        gameObjectEnemy.GetComponent<YangtuoKingController>().StartFight();
     }
     
     

@@ -10,7 +10,8 @@ public class YangtuoGenerator : MonoBehaviour
     private List<GameObject> list;
     public GameObject yangtuo;
     public float spwanTime = 1.0f;
-    public int numberKilled = 0;
+
+    private int killedNumber = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,10 @@ public class YangtuoGenerator : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("number is "+list.Count);
+        if (killedNumber==30)
+        {
+            SceneManager.LoadScene("SceneOne");
+        }
     }
 
     private void generateEnemy(GameObject yangtuo)
@@ -43,25 +47,22 @@ public class YangtuoGenerator : MonoBehaviour
     //generate enemies wave
     IEnumerator enemyWave()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 30; i++)
         {
             Debug.Log("wait for 1s");
             yield return new WaitForSeconds(spwanTime);
             generateEnemy(yangtuo);
             list.Add(yangtuo);
         }
-
-        CheckKilledAll();
+        
     }
     
-    IEnumerator CheckKilledAll()
-    {
-        if ( list.Count==10)
-        {
-            SceneManager.LoadScene("SceneOne");
-        }
-        return null;
-    }
     // Update is called once per frame
+
+    public void UpdateCount()
+    {
+        killedNumber++;
+        Debug.Log(killedNumber);
+    }
     
 }

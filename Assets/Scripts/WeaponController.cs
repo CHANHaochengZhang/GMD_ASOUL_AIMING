@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,7 +18,7 @@ public class WeaponController : MonoBehaviour
 
     public int bulletsMag = 30;//射击的位置
     public int range = 100;//射程
-    public int bulletLeft = 90;//备弹
+    public int bulletLeft = 180;//备弹
     public int currentBullets;//当前子弹数量
     public float fireRate = 0.1f;
     private float fireTimer;//
@@ -168,7 +169,7 @@ public class WeaponController : MonoBehaviour
             Debug.Log(bullet.tag+"shot");
             //Remove gravity from the rifle bullet
                 bullet.GetComponent<Rigidbody>().useGravity = false;
-            
+          
        
 
             //Spawn casing prefab at spawnpoint
@@ -266,5 +267,18 @@ public class WeaponController : MonoBehaviour
         }
 
         
+    }
+
+
+    private void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.tag == "Yangtuo")
+        {
+            if ( c.gameObject.GetComponent<YangtuoController>().GetCurrentHealth() == 1)
+            {
+            
+            }
+          
+        }
     }
 }

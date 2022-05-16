@@ -10,10 +10,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
 
-public class YangtuoController : MonoBehaviour
+public class YangtuoKingController : MonoBehaviour
 {
 
-  private float health, maxHealth = 1000;
+    private float currentHealth;
+
+    private float maxHealth;
   private float moveSpeed = 0.03f;
   private Transform playerDirection;
   private GameObject targetPlayer;
@@ -36,12 +38,11 @@ public class YangtuoController : MonoBehaviour
 
   public Image healthSlider;
 
-  public TextMeshProUGUI healthNumber;
-
-  private bool destroyed;
-
+  private bool isFight = false;
   
-  private YangtuoGenerator yangtuoGenerator;
+  
+  private HealthManager healthManager;
+
 
 
   [Header("Sound")] 
@@ -51,37 +52,30 @@ public class YangtuoController : MonoBehaviour
   
    void Start()
    {
-       yangtuoGenerator = GameObject.FindWithTag("EnemyCounter").GetComponent<YangtuoGenerator>();
-       health = 800;
+      
+       currentHealth = 1000;
        maxHealth = 1000;
        /*GameObject a = Instantiate(player) as GameObject;*/
        player = GameObject.FindObjectOfType<PlayerMovements> ();
+       healthManager = new HealthManager();
        distance=100;
        awakeDistance = 3;
        timer = timeBetweenAttacks;
        animator = GetComponent<Animator>();
        targetPlayer = GameObject.FindWithTag("Player");
        targetPlayer = GameObject.Find("Player");
-      
-      
        
        audioSource = GetComponent<AudioSource>();
-       health = maxHealth;
+      
        body = transform.GetComponent<Rigidbody>();
        distanceCalculator = new DistanceCalculator();
-     
-       health = 3;
-    
-       if (health<=0)
-       {
-           Destroy(gameObject);
-  
-       }
-       
+   
    }
 
    private void Update()
    {
+       Debug.Log(currentHealth+"  "+maxHealth + currentHealth/maxHealth);
+       healthSlider.fillAmount = currentHealth / maxHealth;
        body.AddForce(Vector3.down*9);
        scene = SceneManager.GetActiveScene();
        playerDirection = player.transform;
@@ -92,17 +86,27 @@ public class YangtuoController : MonoBehaviour
        
        distance = distanceCalculator.getDistance(playerDirection.position,transform.position);
       
-       if(scene.name=="SceneTwo"){
+       if(scene.name=="SceneOne"){
        FindTarget(distance,awakeDistance,targetPlayer);
-       MoveToPlayer();
-       
+
+       healthManager.HealthBarFiller(healthSlider, currentHealth,  maxHealth);
+       healthSlider.fillAmount = currentHealth/maxHealth;
+
+       if (currentHealth<=500)
+       {
+           SceneManager.LoadScene ("SceneTwo");
+       }
        /*StartCoroutine(RangeAttack());*/
        }
 
-       if (scene.name=="SceneOne")
+       if (isFight == true)
        {
-           /*StartCoroutine(RangeAttack());*/
+           StartCoroutine(RangeAttack());
        }
+           
+      
+      
+
    }
 
 
@@ -111,7 +115,7 @@ public class YangtuoController : MonoBehaviour
        if (c.tag=="ak47Bullet")
        {
            Debug.Log("hit yangtuo!!");
-           TakeDamage(1);
+           TakeDamage(5);
        }
       
    }
@@ -134,24 +138,6 @@ public class YangtuoController : MonoBehaviour
    }
 
 
-   public void MoveToPlayer()
-   {
-       if (distance >= 2)
-           {
-               /*animator.Play("Move");*/
-               animator.SetInteger("Move", 1);
-               transform.Translate(Vector3.forward * moveSpeed);
-               /*Debug.Log(" moving ");*/
-           }
-           else
-           {
-               animator.SetInteger("Move", 0);
-               Jump();
-           }
-
-       }
-   
-
    public void Jump()
    {
        RaycastHit hit;
@@ -167,31 +153,37 @@ public class YangtuoController : MonoBehaviour
 
    IEnumerator RangeAttack()
    {
-
-       for (int i = 0; i < 300; i++)
+       while (true)
        {
-           animator.SetInteger("Attack",0);
-           Debug.Log("----range attacking---");
-           yield return new WaitForSeconds(1f);
-           GameObject instantBullet = Instantiate(enemyRangeAttack, transform.position, transform.rotation) as GameObject;;
-
-           Rigidbody rigidbody = instantBullet.GetComponent<Rigidbody>();
-
-           var x = transform.position.x;
-           var y = transform.position.y;
-           var z = transform.position.z;
-           
-           instantBullet.transform.position = new Vector3(x,y+2,z);
-           animator.SetInteger("Attack",1);
-           rigidbody.velocity = transform.forward * 40f;
+           isFight = false;
+           for (int i = 0; i < 30; i++)
+           {
+               Invoke("Shoot",1);
+               yield return new WaitForSeconds(1f);
+           }
+           yield return new WaitForSeconds(5f);
        }
-       
-
+      
    }
    
    
-   
-   
+   public void Shoot(){
+       animator.SetInteger("Attack",0);
+   Debug.Log("----range attacking---");
+
+   GameObject instantBullet = Instantiate(enemyRangeAttack, transform.position, transform.rotation) as GameObject;;
+
+   Rigidbody rigidbody = instantBullet.GetComponent<Rigidbody>();
+
+   var x = transform.position.x;
+   var y = transform.position.y;
+   var z = transform.position.z;
+           
+   instantBullet.transform.position = new Vector3(x,y+2,z);
+   /*animator.SetInteger("Attack",1);*/
+   rigidbody.velocity = transform.forward * 40f;
+
+   }
    
    public void GiveDamage(GameObject gameObject)
    {
@@ -208,11 +200,11 @@ public class YangtuoController : MonoBehaviour
    public void TakeDamage(float damageAmount)
    {
        Debug.Log("Damage taken from player: "+damageAmount);
-       health = health-damageAmount;
-       Debug.Log("Current health: "+health);
-       if (health<=0)
+       currentHealth= currentHealth-damageAmount;
+       Debug.Log("Current health: "+currentHealth);
+       if (currentHealth<=0)
        {
-           yangtuoGenerator.UpdateCount();
+      
            Destroy(gameObject);
        }
    }
@@ -225,15 +217,15 @@ public class YangtuoController : MonoBehaviour
        
    }
 
-   public float GetCurrentHealth()
+   public void StartFight()
    {
-       return health;
+       isFight = true;
    }
 
-   public bool isDestroyed()
+   public void Fight()
    {
-       return destroyed;
+       StartCoroutine(RangeAttack());
    }
-
+   
 
 }

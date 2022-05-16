@@ -14,24 +14,25 @@ public class PlayerHealth : MonoBehaviour
 
     public TextMeshProUGUI healthNumber;
 
-    private float currentHealth;
+    private static float _currentHealth = 100;
 
     private float maxHealth;
 
     private HealthManager healthManager;
     private void Start()
     {
-        currentHealth = 80;
+      
         maxHealth = 100;
         healthManager = new HealthManager();
     }
 
     private void Update()
     {
-        healthNumber.text = currentHealth + "%";
+        healthNumber.text = _currentHealth + "%";
         effects();
-        healthManager.HealthBarFiller(healthSlider, currentHealth,  maxHealth);
-        if (currentHealth<=0)
+        healthManager.HealthBarFiller(healthSlider, _currentHealth,  maxHealth);
+        Debug.Log("healthSlider "+healthSlider.fillAmount);
+        if (_currentHealth<=0)
         {
             SceneManager.LoadScene ("SceneDeath");
         }
@@ -47,13 +48,13 @@ public class PlayerHealth : MonoBehaviour
     //add effects to health bar by health 
     void effects()
     {
-        if (currentHealth<71 && currentHealth>30)
+        if (_currentHealth<71 && _currentHealth>30)
         {
             healthNumber.color = Color.yellow;
             healthSlider.color = Color.yellow;
             
         }
-        if (currentHealth<31)
+        if (_currentHealth<31)
         {
             healthNumber.color = Color.red;
             healthSlider.color = Color.red;
@@ -64,8 +65,8 @@ public class PlayerHealth : MonoBehaviour
     public void takeDamage(float damage)
     {
         Debug.Log("player takes damage");
-        currentHealth = currentHealth - damage;
-        Debug.Log("health is "+currentHealth / maxHealth);
+        _currentHealth = _currentHealth - damage;
+        Debug.Log("health is "+_currentHealth / maxHealth);
     }
     
     

@@ -12,6 +12,8 @@ TagManager:
   - Plane
   - NPC
   - EnemyAttack
+  - Fire
+  - EnemyCounter
   layers:
   - Default
   - TransparentFX
