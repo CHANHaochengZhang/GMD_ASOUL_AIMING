@@ -12,7 +12,7 @@ using Utils;
 
 public class YangtuoController : MonoBehaviour
 {
-  private delegate void  OnEnemyKilled();
+
   private float health, maxHealth = 1000;
   private float moveSpeed = 0.03f;
   private Transform playerDirection;
@@ -47,6 +47,7 @@ public class YangtuoController : MonoBehaviour
   
    void Start()
    {
+  
        health = 800;
        maxHealth = 1000;
        /*GameObject a = Instantiate(player) as GameObject;*/
@@ -219,6 +220,6 @@ public class YangtuoController : MonoBehaviour
        
    }
    
-   
-   
+
+
 }
