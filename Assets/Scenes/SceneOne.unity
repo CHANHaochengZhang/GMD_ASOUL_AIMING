@@ -9138,6 +9138,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2537677049846806256, guid: 8f4ea9c1fb5090147838a6733ae9cc8d,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2537677049846806257, guid: 8f4ea9c1fb5090147838a6733ae9cc8d,
         type: 3}
       propertyPath: m_Size.x
@@ -9157,6 +9162,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.y
       value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537677049846806257, guid: 8f4ea9c1fb5090147838a6733ae9cc8d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2537677049846806260, guid: 8f4ea9c1fb5090147838a6733ae9cc8d,
         type: 3}

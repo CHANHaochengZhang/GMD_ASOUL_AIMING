@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("___________________QUITRQWRQWRQWR");
+    
             Application.Quit();
         }
     }
@@ -22,11 +22,6 @@ public class MainMenu : MonoBehaviour
     public void PlayButton()
     {
         SceneManager.LoadScene("SceneOne");
-    }
-
-    public void SettingsButton()
-    {
-        SceneManager.LoadScene("Settings");
     }
     
     public void QuitButton()
