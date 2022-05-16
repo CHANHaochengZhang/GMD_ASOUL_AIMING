@@ -161,7 +161,11 @@ public class WeaponController : MonoBehaviour
 
             //Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = 
+<<<<<<< HEAD:Assets/Scripts/PlayerControllers/WeaponController.cs
                 bullet.transform.forward * 250;
+=======
+                bullet.transform.forward * 150;
+>>>>>>> 391c1a93630ed008583aebb82f8561e697b9fb4a:Assets/Scripts/WeaponController.cs
        
                  
             //Add tag to the bullet
@@ -178,8 +182,8 @@ public class WeaponController : MonoBehaviour
                 Spawnpoints.casingSpawnPoint.transform.rotation);
             
             
-            Destroy(hitParticleEffect, 1);
-            Destroy(bulletHoleEffect, 3f);
+            Destroy(hitParticleEffect, 0.1f);
+            Destroy(bulletHoleEffect, 0.3f);
         }
 
         if (!isAiming)

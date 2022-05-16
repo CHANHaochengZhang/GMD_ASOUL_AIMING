@@ -14,7 +14,7 @@ public class YangtuoController : MonoBehaviour
 {
 // set up basic properties of enemy yangtuo     
   private float health, maxHealth = 1000;
-  private float moveSpeed = 0.03f;
+  private float moveSpeed = 0.01f;
   private Transform playerDirection;
   private GameObject targetPlayer;
   private PlayerMovements player;
