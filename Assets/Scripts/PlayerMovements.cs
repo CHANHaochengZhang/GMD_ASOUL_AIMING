@@ -171,20 +171,6 @@ public class PlayerMovements : MonoBehaviour
         }
         
     }
-
-
-   
-    public void TakeDamage(int attacker)
-    {
-        
-        /*int damage = Mathf.Max(attacker.CurrentDamage())*/
-
-        int damage = attacker;
-        int currentHealth = maxHealth - damage;
-        
-        updateHealthBarOnAttack?.Invoke(currentHealth,maxHealth);
-        
-        
-    }
+    
     
 }

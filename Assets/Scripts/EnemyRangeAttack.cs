@@ -8,12 +8,12 @@ public class EnemyRangeAttack : MonoBehaviour
     public float lifeTime;
 
     public int damage;
-
-    public float speed;
+    
 
     private void Start()
     {
         damage = 2;
+        Invoke("Destroy",lifeTime);
     }
 
     public void CheckHit()
@@ -41,34 +41,11 @@ public class EnemyRangeAttack : MonoBehaviour
             Debug.Log("range hit successfully!!!!!!!!!!!!!!");
             GiveDamage(c.gameObject);
         }
-      
+    }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(this);
     }
     
-    //
-    //
-    // public void Go ()
-    // {
-    //     GetComponent<Rigidbody>().AddForce(transform.forward * 1, ForceMode.VelocityChange);
-    // }
-    //
-    // void FixedUpdate()
-    // {
-    //     GetComponent<Rigidbody>().AddForce(transform.forward * beamVelocity, ForceMode.Acceleration);
-    // }
-    //
-    //
-    // void Start()
-    // {
-    //     Destroy(gameObject, LifeTime);
-    // }
-    //
-    // void Update()
-    // {
-    //     //transform.position += transform.forward * Speed * Time.deltaTime;       
-    // }
-    //
-    // void OnCollisionEnter(Collision collision)
-    // {        
-    //     Destroy(gameObject);
-    // }
 }

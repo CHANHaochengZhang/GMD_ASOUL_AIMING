@@ -58,8 +58,8 @@ public class YangtuoKingController : MonoBehaviour
       
        async = SceneManager.LoadSceneAsync("SceneTwo");
        async.allowSceneActivation = false;
-       currentHealth = 1000;
-       maxHealth = 1000;
+       currentHealth = 400;
+       maxHealth = 400;
        /*GameObject a = Instantiate(player) as GameObject;*/
        player = GameObject.FindObjectOfType<PlayerMovements> ();
        healthManager = new HealthManager();
@@ -97,7 +97,7 @@ public class YangtuoKingController : MonoBehaviour
        healthManager.HealthBarFiller(healthSlider, currentHealth,  maxHealth);
        healthSlider.fillAmount = currentHealth/maxHealth;
 
-       if (currentHealth<=500)
+       if (currentHealth<=15)
        {
            async.allowSceneActivation = true;
        }
