@@ -54,7 +54,10 @@ public class PlayerMovements : MonoBehaviour
         fpsCamera = GetComponentInChildren<Camera>();
         groundCheck = GameObject.Find("Player/CheckGround").GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
-      
+
+
+
+        
         sit = new Vector3(0, 1.4f, 0);
         stand = new Vector3(0, 1.6f, 0);
     }
