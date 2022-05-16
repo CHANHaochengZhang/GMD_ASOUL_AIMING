@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
 
     public int bulletsMag = 30;//射击的位置
     public int range = 100;//射程
-    public int bulletLeft = 180;//备弹
+    public int bulletLeft = 720;//备弹
     public int currentBullets;//当前子弹数量
     public float fireRate = 0.1f;
     private float fireTimer;//

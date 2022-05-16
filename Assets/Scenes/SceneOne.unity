@@ -18238,6 +18238,11 @@ PrefabInstance:
       propertyPath: enemyHealthCanvas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3502435290287091665, guid: 7af1155d2a7b10e448d593879631dac6,
+        type: 3}
+      propertyPath: bulletLeft
+      value: 720
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af1155d2a7b10e448d593879631dac6, type: 3}
 --- !u!4 &1398122010 stripped
