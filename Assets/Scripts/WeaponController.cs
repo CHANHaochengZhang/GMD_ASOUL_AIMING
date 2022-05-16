@@ -161,7 +161,7 @@ public class WeaponController : MonoBehaviour
 
             //Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = 
-                bullet.transform.forward * 50;
+                bullet.transform.forward * 150;
        
                  
             //Add tag to the bullet
