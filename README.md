@@ -1,5 +1,5 @@
 # GMD_SOUL_AIMING
-##### Player here:https://chanhaochengzhang.github.io/ASoul_aiming_web/
+##### Play here:https://chanhaochengzhang.github.io/ASoul_aiming_web/
 
 ## Unity asset from：
 #### Low Poly FPS Pack - Free (Sample)
