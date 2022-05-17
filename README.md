@@ -1,5 +1,7 @@
 # GMD_SOUL_AIMING
-Unity asset from：
+##### Player here:https://chanhaochengzhang.github.io/ASoul_aiming_web/
+
+## Unity asset from：
 #### Low Poly FPS Pack - Free (Sample)
 https://assetstore.unity.com/packages/3d/props/guns/low-poly-fps-weapons-pack-188037
 #### RPG_FPS_game_assets_industrial
@@ -31,5 +33,5 @@ https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for
 
 
 
-subscribe Asoul：
+##### Subscribe Asoul：
 https://www.bilibili.com/video/BV1gZ4y1a7x4?share_source=copy_web
